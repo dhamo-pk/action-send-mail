@@ -34,7 +34,7 @@ function getFrom(from, username) {
 async function getAttachments(attachments) {
     const globber = await glob.create(attachments.split(',').join('\n'))
     const files = await globber.glob()
-    return files.map(f => ({ filename: path.basename(f), path: f, cid: f.replace(/^.*[\\\/]/, '')}))
+    return files.map(f => ({ filename: path.basename(f), path: f, cid: f.replace(/^.*[\\\/]/, '') }))
 }
 
 async function main() {
@@ -80,11 +80,15 @@ async function main() {
 
         const subject = core.getInput("subject", { required: true })
         const from = core.getInput("from", { required: true })
-        const to = core.getInput("to", { required: true })
         const body = core.getInput("body", { required: false })
         const htmlBody = core.getInput("html_body", { required: false })
         const cc = core.getInput("cc", { required: false })
         const bcc = core.getInput("bcc", { required: false })
+        if (cc.length > 0 || bcc.length > 0) {
+            const to = core.getInput("to", { required: false })
+        } else {
+            const to = core.getInput("to", { required: true })
+        }
         const replyTo = core.getInput("reply_to", { required: false })
         const inReplyTo = core.getInput("in_reply_to", { required: false })
         const attachments = core.getInput("attachments", { required: false })
