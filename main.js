@@ -84,11 +84,12 @@ async function main() {
         const htmlBody = core.getInput("html_body", { required: false })
         const cc = core.getInput("cc", { required: false })
         const bcc = core.getInput("bcc", { required: false })
-        if (cc.length > 0 || bcc.length > 0) {
-            const to = core.getInput("to", { required: false })
-        } else {
-            const to = core.getInput("to", { required: true })
-        }
+        const to = core.getInput("to", { required: true })
+        // if (cc.length > 0 || bcc.length > 0) {
+        //     const to = core.getInput("to", { required: false })
+        // } else {
+        //     const to = core.getInput("to", { required: true })
+        // }
         const replyTo = core.getInput("reply_to", { required: false })
         const inReplyTo = core.getInput("in_reply_to", { required: false })
         const attachments = core.getInput("attachments", { required: false })
